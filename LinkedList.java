@@ -12,6 +12,16 @@ public class LinkedList<T>
 		this.size = 0;
 	}
 
+	public int Length() {
+        int length = 0;
+        Node<T> temp = head;
+        while (temp != null) {
+            length++;
+            temp = temp.next;
+        }
+        return length;
+        }
+	
 	public void addEnd(T data)
 	{
 		Node<T> newNode = new Node<>(data);
@@ -54,6 +64,46 @@ public class LinkedList<T>
         newNode.next = slow.next;
         slow.next = newNode;
 	}
+
+        public void addAt(int index, T data) 
+	{
+		if (index < 0 || index > Length() || head == null) {
+            System.out.println("Invalid position or list is empty");
+            return;
+        }
+        
+		Node<T> newNode = new Node<>(data);
+		
+        if (index == 0) {
+            newNode.next = head;
+            head = newNode;
+        } else {
+            Node<T> temp = head;
+            for (int i = 0; i < index - 1; i++) {
+                temp = temp.next;
+            }
+            newNode.next = temp.next;
+            temp.next = newNode;
+        }
+    }
+	
+	public void removeAt(int index)
+	{
+		 Node<T> temp = head;
+		 if (index < 0 || index >= Length() || head == null) {
+	            System.out.println("Invalid position or list is empty");
+	            return;
+	     }
+		 if (index == 0) {
+	            head = head.next;
+	     } 
+		 else {
+	            for (int i = 0; i < index - 1; i++) {
+	                temp = temp.next;}
+	            temp.next = temp.next.next;
+		 }
+       
+    }
 	
 	public void removeFront() {
         if (head == null) {
